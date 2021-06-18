@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "name": "Anuj",
+      "source": "New Delhi",
+      "destination": "Chennai",
+      "time": "21:20",
+      "date": "05-09-2020",
+      "username": "vanij",
+      "password": "vanij123",
+      "id": "1"
+    },
+    {
+      "name": "Amit",
+      "source": "New delhi",
+      "destination": "Mumbai",
+      "time": "15:10",
+      "date": "03-11-2020",
+      "username": "akshay",
+      "password": "akshay123",
+      "id": "2"
+    }
+  ]
+}
