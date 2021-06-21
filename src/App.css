@@ -21,7 +21,7 @@ body{
   font-weight: 500;
 
 }
-.container input[type="text"],.container input[type="password"], .container select, .container input[type="date"],.container input[type="time"]{
+.container input[type="text"],.container input[type="password"], .container select, .container input[type="date"],.container input[type="time"], .container button{
   border: 0;
   background: none;
   display: block;
@@ -36,11 +36,11 @@ body{
   border-radius: 24px;
   transition: 0.25s;
 }
-.container input[type="text"]:focus,.container input[type="password"]:focus,.container select,.container input[type="date"],.container input[type="time"]{
+.container input[type="text"]:focus,.container input[type="password"]:focus,.container select,.container input[type="date"],.container input[type="time"],.container button{
   width: 280px;
   border-color: #2ecc71;
 }
-.container input[type="submit"]{
+.container button{
   border: 0;
   background: none;
   display: block;
@@ -55,7 +55,7 @@ body{
   font-size: 17px;
   font-family: 'Libre Baskerville', serif;
 }
-.container input[type="submit"]:hover{
+.container button:hover{
   background: #2ecc71;
 }
 

@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import "../App.css";
 import Navbar from './Navbar';
 import axios from 'axios';
-const Dashboard = () => {
+import {ToastContainer, toast } from "react-toastify";
+const Dashboard = (props) => {
     const url = "http://localhost:3001/users";
-    const [setInputext] = useState();
     const [data, setData] = useState({
         name: "",
         source: "",
@@ -12,32 +12,37 @@ const Dashboard = () => {
         date: "",
         time: "",
     });
-    const onSubmit = e => {
+    const handleSubmit = (e) => {
         e.preventDefault();
+        validationCheck();
         axios.post(url, {
             name: data.name,
             source: data.source,
             destination: data.destination,
             date: data.date,
             time: data.time
-        })
-            .then(res => {
-                console.log(res.data);
-            })
-        setInputext('');
+        });
+        props.history.push("/bookingdetails");
     };
     const onChange = e => {
         const newdata = { ...data }
         newdata[e.target.id] = e.target.value
         setData(newdata);
-        console.log(newdata);
     };
+    const validationCheck = () => {
+        if(data.name === ""){
+            toast.warn("name cant be empty");
+        }
+        if (data.source === data.destination){
+            toast.warn("source destination cannot be the same");
+        }
+    }
     return (
         <div>
             <div>
                 <Navbar />
             </div>
-            <form className="container" onSubmit={(e) => onSubmit(e)}>
+            <form className="container" >
                 <label> Name:
                     <input id="name" type="text" onChange={(e) => onChange(e)} value={data.name} />
                 </label>
@@ -66,9 +71,9 @@ const Dashboard = () => {
                     Time:
                     <input id="time" type="time" onChange={(e) => onChange(e)} value={data.time} />
                 </label>
-                <input type="submit" value="Book" />
+                <button onClick={(e) => handleSubmit(e)}> BOOK </button>
+                <ToastContainer/>
             </form>
-
         </div >
     )
 }

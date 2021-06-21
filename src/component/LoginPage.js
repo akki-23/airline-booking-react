@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginPage = (props) => {
     const username = useFormInput('');
@@ -17,6 +18,9 @@ const LoginPage = (props) => {
                     props.history.push('/dashboard');
                 }
                 else{
+                    toast.warn("Username and Password should not be empty",{
+                        position: "top-center"
+                    })
                     props.history.push("/")
                 }
             }).catch(error => {
@@ -27,8 +31,9 @@ const LoginPage = (props) => {
         <div className="container">
             <h1>LOGIN</h1>
             <input type="text" {...username} placeholder="Username"/>
-            <input type="password" {...password} placeholder="Password"/>
-            <input type="submit" value={loading ? 'Loading...' : 'Login'} onClick={handleLogin} disabled={loading} />
+            <input type="password" {...password} placeholder="Password" maxLength="12" />
+            <button value={loading ? 'Loading...' : 'Login'} onClick={handleLogin} disabled={loading}> LOGIN </button>
+            <ToastContainer/>
         </div>
     );
 }
