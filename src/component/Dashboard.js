@@ -29,7 +29,7 @@ const Dashboard = (props) => {
                 date: data.date,
                 time: data.time
             });
-        props.history.push("/bookingdetails");
+        props.history.push("/users/:id");
         }
     };
     const handleInput= e => {
