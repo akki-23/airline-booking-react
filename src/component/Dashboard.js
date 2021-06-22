@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import "../App.css";
 import Navbar from './Navbar';
 import axios from 'axios';
-import {ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+
 const Dashboard = (props) => {
+    const [validate, setValidate] = useState("fileds cannot be empty");
     const url = "http://localhost:3001/users";
     const [data, setData] = useState({
         name: "",
@@ -14,27 +16,35 @@ const Dashboard = (props) => {
     });
     const handleSubmit = (e) => {
         e.preventDefault();
-        validationCheck();
-        axios.post(url, {
-            name: data.name,
-            source: data.source,
-            destination: data.destination,
-            date: data.date,
-            time: data.time
-        });
+        const errors = validationCheck();
+        if (errors === "false") {
+            toast.error(validate, {
+                position: 'top-center'
+            });
+        } else {
+            axios.post(url, {
+                name: data.name,
+                source: data.source,
+                destination: data.destination,
+                date: data.date,
+                time: data.time
+            });
         props.history.push("/bookingdetails");
+        }
     };
-    const onChange = e => {
+    const handleInput= e => {
         const newdata = { ...data }
         newdata[e.target.id] = e.target.value
         setData(newdata);
     };
     const validationCheck = () => {
-        if(data.name === ""){
-            toast.warn("name cant be empty");
+        if (data.destination === data.source) {
+            setValidate("source and destination cannot be same");
+            return "false"
         }
-        if (data.source === data.destination){
-            toast.warn("source destination cannot be the same");
+        if (data.name === "" && data.source === "" && data.destination === "" && data.date === "" && data.time === "") {
+            setValidate("fields cannot be empty");
+            return "false"
         }
     }
     return (
@@ -44,11 +54,11 @@ const Dashboard = (props) => {
             </div>
             <form className="container" >
                 <label> Name:
-                    <input id="name" type="text" onChange={(e) => onChange(e)} value={data.name} />
+                    <input id="name" type="text" onChange={(e) => handleInput(e)} value={data.name} />
                 </label>
                 <label>
                     From:
-                    <select id="source" onChange={(e) => onChange(e)} value={data.source}>
+                    <select id="source" onChange={(e) => handleInput(e)} value={data.source}>
                         <option value="New Delhi">New delhi</option>
                         <option value="Mumbai">Mumbai</option>
                         <option value="Kolkata">Kolkata</option>
@@ -56,7 +66,7 @@ const Dashboard = (props) => {
                     </select>
                 </label>
                 <label>To:
-                    <select id="destination" onChange={(e) => onChange(e)} value={data.destination}>
+                    <select id="destination" onChange={(e) => handleInput(e)} value={data.destination}>
                         <option value="New Delhi">New delhi</option>
                         <option value="Mumbai">Mumbai</option>
                         <option value="Kolkata">Kolkata</option>
@@ -65,14 +75,14 @@ const Dashboard = (props) => {
                 </label>
                 <label>
                     Date:
-                    <input id="date" type="date" onChange={(e) => onChange(e)} value={data.date} />
+                    <input id="date" type="date" onChange={(e) => handleInput(e)} value={data.date} />
                 </label>
                 <label>
                     Time:
-                    <input id="time" type="time" onChange={(e) => onChange(e)} value={data.time} />
+                    <input id="time" type="time" onChange={(e) => handleInput(e)} value={data.time} />
                 </label>
                 <button onClick={(e) => handleSubmit(e)}> BOOK </button>
-                <ToastContainer/>
+                <ToastContainer />
             </form>
         </div >
     )

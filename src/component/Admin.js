@@ -48,8 +48,8 @@ const Admin = () => {
                                 <td>{user.time}</td>
                                 <td>{user.date}</td>
                                 <td>
-                                    <Link class="btn btn-primary mr-2" to={`users/edit/${user.id}`}>Edit</Link>
-                                    <Link class="btn btn-danger" onClick={()=> deleteUser(user.id)}>Delete</Link>
+                                    <Link className="btn btn-primary mr-2" to={`users/edit/${user.id}`}>Edit</Link>
+                                    <Link className="btn btn-danger" onClick={()=> deleteUser(user.id)}>Delete</Link>
                                 </td>
                             </tr>
                         ))}

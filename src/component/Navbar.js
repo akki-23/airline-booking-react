@@ -8,10 +8,10 @@ const Navbar = (props) => {
         history.push("/");
     };
     return (
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <div>
                 <a className="navbar-brand" href="/"><i class="fas-fa-plane fa-2x"></i></a>
-                <input classname="btn btn-primary btn-dark" type="submit" value="Logout" onClick={handleLogout}/>
+                <input className="btn btn-primary btn-dark" type="submit" value="Logout" onClick={handleLogout}/>
             </div>
         </nav>
 
