@@ -8,10 +8,10 @@ const BookedDetails = () => {
       const { id } = useParams();
       useEffect(() => {
         loadUser();
-      }, []);
+      });
       const loadUser = async () => {
-        const res = await axios.get(`http://localhost:3003/users/${id}`);
-        setUser(res.data);
+        const result = await axios.get(`http://localhost:3003/users/${id}`);
+        setUser(result.data);
       }
     return (
         <div>
